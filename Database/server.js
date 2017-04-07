@@ -37,94 +37,59 @@ db.once('open', function () {
 });
 
 // Schemas ===========================================
+var housingSchema = new mongoose.Schema({
+    "_id" : String,
+    "Project Name" : String,
+    "Owner" : String,
+    "Developer" : String,
+    "Address" : String,
+    "Zip Code" : Number,
+    "Council District" : Number,
+    "Kirwan Opportunity Index" : String,
+    "Distance to Bus Stop" : String,
+    "Total Units" : Number,
+    "Total Affordable Units" : Number,
+    "Unit Type" : String,
+    "Program" : String,
+    "Housing Type" : String,
+    "Status" : String,
+    "Affordability Start Date" : Date,
+    "Affordability Period" : Number,
+    "Affordability Expiration Date" : Date,
+    "Certification Date" : Date,
+    "C of O Date" : Date,
+    "Required Amount of Fee in Lieu" : Number,
+    "Date Fee in Lieu Received" : Number,
+    "Units <= 30% MFI" : Number,
+    "Units <= 40% MFI" : Number,
+    "Units <= 50% MFI" : Number,
+    "Units <= 60% MFI" : Number,
+    "Units <= 65% MFI" : Number,
+    "Units <= 80% MFI" : Number,
+    "Units <= 100% MFI" : Number,
+    "Market Rate Units" : Number,
+    "City Funded Amount" : Number,
+    "% of Funds Leveraged" : Number,
+    "CLT" : String,
+    "DDB" : String,
+    "RNY" : String,
+    "MDA" : String,
+    "NBG" : String,
+    "PUDDA" : String,
+    "SMART" : String,
+    "TOD" : String,
+    "UNO" : String,
+    "VMU" : String,
+    "Location" : String //"(30.2820072186666, -97.708413721868695)"
+});
 
-var Schema = mongoose.Schema;
-// var userSchema = new Schema({
-//     name: String,
-//     email: String,
-//     username: { type: String, required: true, unique: true },
-//     password: { type: String, required: true },
-//     admin: Boolean,
-//     imageuri: String,
-//     following: [{ type: String }]
-// });
-
-// var User = mongoose.model('User', userSchema);
-
-// var postSchema = new Schema({
-//     username: { type: String, required: true },
-//     body: { type: String, required: true },
-//     num_likes: Number,
-//     users_with_like: [{ type: String }],
-//     createdOn: Date,
-//     isactive: Boolean
-// });
-
-// var Post = mongoose.model('Post', postSchema);
+ var Housing = mongoose.model('Housing', housingSchema);
 
 // API Endpoints ===========================================
 // Profile ==============================================
-app.post('/userInfo', function (req, res) {
-    if (req.body.userOwnsPage && req.body.userOwnsPage == "true") {
-        User.findOne({ username: req.body.username }, 'username email name imageuri', function (err, user) {
-
-            if (user === null) {
-                var response = {
-                    status: 500,
-                    error: 'User not found, please sign in.'
-                }
-                res.end(JSON.stringify(response));
-                return;
-            }
-
-            var isMatch = true; // false by default
-            // if(req.body.token !== null)
-            // {
-            //     isMatch = bcrypt.compareSync(user.username + user.password, req.body.token);
-            // }
-
-            if (isMatch) {
-                var userInfo = {
-                    name: user.name,
-                    username: user.username,
-                    email: user.email,
-                    imageuri: user.imageUri
-                };
-
-                res.send(JSON.stringify(userInfo));
-            }
-            else {
-                var response = {
-                    status: 501,
-                    error: 'User token was incorrect please signin again.'
-                }
-                res.end(JSON.stringify(response));
-            }
-        });
-    }
-    // User is guest, hide personal data
-    else {
-        User.findOne({ username: req.body.username }, 'username name imageuri', function (err, user) {
-
-            if (user === null) {
-                var response = {
-                    status: 500,
-                    error: 'Requested user not found.'
-                }
-                res.end(JSON.stringify(response));
-            }
-            else {
-                var userInfo = {
-                    name: user.name,
-                    username: user.username,
-                    imageuri: user.imageUri
-                };
-                res.send(JSON.stringify(userInfo));
-            }
-        });
-    }
+app.get('/getPoints', function (req, res) {
+    Housing.find({}, function(err, e){res.send(e);});
 });
-
 
 // Server Start ==========================================
 

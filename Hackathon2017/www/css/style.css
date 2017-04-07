@@ -1,4 +1,17 @@
-/* Empty. Add your own CSS if you like */
 .more-info-btn {
-  padding-left: 0
+    padding-left: 0;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+.scroll {
+    height: 100%;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
 }

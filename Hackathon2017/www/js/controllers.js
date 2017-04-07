@@ -1,6 +1,12 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {})
+
+.controller('DashCtrl', function($scope, Chats) {
+  $scope.chats = Chats.all();
+  $scope.remove = function(chat) {
+    Chats.remove(chat);
+  };
+})
 
 .controller('ChatsCtrl', function($scope, Chats) {
   // With the new view caching in Ionic, Controllers are only called
@@ -11,10 +17,7 @@ angular.module('starter.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  };
+
 })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
@@ -26,6 +29,7 @@ angular.module('starter.controllers', [])
     enableFriends: true
   }
 })
+
 .controller('QualifyCtrl', function($scope) {
   $scope.more_info_link = "Learn More";
   $scope.more_info = true;
@@ -43,9 +47,31 @@ angular.module('starter.controllers', [])
 
     localStorage.setItem('qualified', qualifiedStatus);
   }
+})
 
+.controller('MapCtrl', function($scope, $ionicLoading) {
 
+    google.maps.event.addDomListener(window, 'load', function() {
+        var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
 
+        var mapOptions = {
+            center: myLatlng,
+            zoom: 16,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
 
+        var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+        navigator.geolocation.getCurrentPosition(function(pos) {
+            map.setCenter(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+            var myLocation = new google.maps.Marker({
+                position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+                map: map,
+                title: "My Location"
+            });
+        });
+
+        $scope.map = map;
+    });
 
 });

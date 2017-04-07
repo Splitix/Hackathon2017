@@ -78,6 +78,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       }
     }
   })
+
+  .state('tab.qualify', {
+    url: '/qualify',
+    views: {
+      'tab-qualify': {
+        templateUrl: 'templates/tab-qualify.html',
+        controller: 'QualifyCtrl'
+      }
+    }
+  })
+  
   .state('tab.map', {
     url: '/map',
     views: {

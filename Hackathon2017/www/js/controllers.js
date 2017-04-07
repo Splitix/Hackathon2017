@@ -27,8 +27,28 @@ angular.module('starter.controllers', [])
 .controller('AccountCtrl', function($scope) {
   $scope.settings = {
     enableFriends: true
-  };
+  }
 })
+
+.controller('QualifyCtrl', function($scope) {
+  $scope.more_info_link = "Learn More";
+  $scope.more_info = true;
+  $scope.showMoreInfo = function() {
+    $scope.more_info = !$scope.more_info;
+    $scope.more_info_link = $scope.more_info ? "Learn More" : "See less"
+  };
+
+  $scope.qualifyIncome = function(income) {
+    qualifiedStatus = false;
+    // http://www.austintexas.gov/sites/default/files/files/2016_HOME_HUD_MFI_Limits_Eff_6-6-16__NHCD_FINAL.pdf
+    if (income < 77800) {
+      qualifiedStatus = true;
+    }
+
+    localStorage.setItem('qualified', qualifiedStatus);
+  }
+})
+
 .controller('MapCtrl', function($scope, $ionicLoading) {
 
     google.maps.event.addDomListener(window, 'load', function() {

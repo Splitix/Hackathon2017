@@ -105,7 +105,7 @@ angular.module('starter.controllers', [])
 .controller('MapCtrl', function($scope, $ionicLoading) {
     $scope.show = function() {
       $ionicLoading.show({
-        template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+        template: '<p class="spinner">Loading...</p><ion-spinner></ion-spinner>'
       });
     };
 

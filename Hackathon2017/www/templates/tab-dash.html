@@ -5,7 +5,8 @@
       <div class="item item-image">
         <img src="/img/yellowhouse.jpg" />
       </div>
-      <a href="#/filters" class="button button-block icon-right ion-ios-settings filter-menu">Filters </a>
+      <a href="#/filters" class="button button-full icon-right ion-ios-settings filter-menu">Filters </a>
+      <p class="button button-full">Hives found: {{resultsFound}}</p>
       <div class="item item-icon-right" ng-repeat="place in places" type="item-text-wrap">
         <div class="property-card">
           <img class="item item-avatar property-avatar" ng-src="{{place.img}}"/>

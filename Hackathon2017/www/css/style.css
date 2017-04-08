@@ -37,7 +37,7 @@
     -webkit-flex-direction: column;
     height: 100%;
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(180, 203, 211)), color-stop(100%,#ffff));
-    background: -webkit-linear-gradient(top, #b4cbd3 0%,#fff 100%);
+    background: -webkit-linear-gradient(top, #fff 0%,#b4cbd3 100%);
 }
 .transparent-a {
   zoom: 1;

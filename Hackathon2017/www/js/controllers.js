@@ -1,7 +1,7 @@
 angular.module('starter.controllers', [])
 
 .controller('LoginCtrl', function($scope) {
-
+  
 })
 .controller('DashCtrl', function($scope, $rootScope, $ionicLoading, HousingService) {
   $scope.show = function() {
@@ -15,11 +15,11 @@ angular.module('starter.controllers', [])
     };
 
   $scope.show($ionicLoading);
-  $rootScope.resultsFound = 0;
+  $rootScope.resultsFound = 0;  
   $scope.places = $rootScope.results;
   $rootScope.filter_form = {};
-  $rootScope.filter_form.address = "", $rootScope.filter_form.zip = "",
-  $rootScope.filter_form.bus = "", $rootScope.filter_form.dev = "",
+  $rootScope.filter_form.address = "", $rootScope.filter_form.zip = "", 
+  $rootScope.filter_form.bus = "", $rootScope.filter_form.dev = "", 
   $rootScope.filter_form.type = "";
   $scope.doRefresh = function() {
     HousingService.SearchHousing($rootScope.filter_form.address, $rootScope.filter_form.zip, $rootScope.filter_form.bus, $rootScope.filter_form.dev, $rootScope.filter_form.type)
@@ -27,7 +27,7 @@ angular.module('starter.controllers', [])
       $rootScope.resultsFound = res.data.length;
      var images = ['apartment.png', 'apartment1.png', 'apartment2.png', 'apartment3.png',
       'home1.png', 'home2.png', 'home4.png'];
-
+      
 
       for(var i = 0; i < res.data.length; i++) {
         res.data[i].img = 'img/' + images[Math.floor(Math.random() * images.length)];
@@ -40,13 +40,7 @@ angular.module('starter.controllers', [])
     })
   }
   // initial refresh
-  if($rootScope.refresh == 0){
-    $scope.doRefresh();
-  }
-
-   $rootScope.refresh = 0;
-   $scope.$broadcast('scroll.refreshComplete');
-   $scope.hide();
+   $scope.doRefresh();
 })
 
 .controller('PlaceDetailCtrl', function($scope, $stateParams, Places, $ionicHistory) {
@@ -74,7 +68,7 @@ angular.module('starter.controllers', [])
   $scope.goBack = function(){
     $ionicHistory.goBack();
   }
-
+  
 
   $scope.showMoreInfo = function() {
     $scope.more_info = !$scope.more_info;
@@ -129,17 +123,16 @@ angular.module('starter.controllers', [])
     .then(function(res) {
       $rootScope.resultsFound = res.data.length;
       $rootScope.results = res.data;
-
+      $state.go('tab.dash');
     });
-
   }
 })
 
 .controller('ResourcesCtrl', function($scope) {
-
+  
 })
 .controller('SettingsCtrl', function($scope) {
-
+  
 })
 .controller('MapCtrl', function($scope, $ionicLoading) {
     $scope.show = function() {

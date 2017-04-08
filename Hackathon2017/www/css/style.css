@@ -16,11 +16,16 @@ h5,
 h6,
 .title {
   color: #69160f!important;
-  font-family: 'Sailors', 'Roboto Condensed', sans-serif;
+  font-family: 'Sailors', 'Roboto', sans-serif;
+}
+
+i {
+  color: #F29B0F!important;
 }
 
 p, .nav-bar-title, div.item-divider {
-  color: #69160f!important;
+  color: #1d2d44!important;
+  font-family: 'Open Sans', sans-serif;
 }
 
 ion-header-bar, div.tab-nav, div.item-divider {
@@ -81,6 +86,16 @@ input[type=text], input[type=number] {
 
 .property-body {
   padding: 0 0 0 15px;
+}
+
+.property-avatar {
+  max-height: 96px;
+  max-width: 96px;
+  padding: 0;
+}
+
+.property-card {
+  display: inline;
 }
 
 #img-home {

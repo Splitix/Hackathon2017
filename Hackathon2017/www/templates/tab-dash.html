@@ -2,15 +2,20 @@
   <ion-content class="padding">
     <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
     <ion-list>
+      <div class="item item-image">
+        <img src="/img/yellowhouse.jpg" />
+      </div>
       <a href="#/filters" class="button button-full icon-right ion-ios-settings filter-menu">Filters </a>
       <p class="button button-full">Hives found: {{resultsFound}}</p>
       <div class="item item-icon-right" ng-repeat="place in places" type="item-text-wrap">
-        <img class="item item-avatar" style="max-height: 75px;" ng-src="{{place.img}}"/>
-        <a class="list card" href="#/places/{{place.id}}">
-          <h2>{{place["Project Name"]}}</h2>
-          <p>{{place.Address}}</p>
-          <i class="icon ion-chevron-right icon-accessory"></i>
-        </a>
+        <div class="property-card">
+          <img class="item item-avatar property-avatar" ng-src="{{place.img}}"/>
+          <a class="list card" href="#/places/{{place.id}}">
+            <h2>{{place["Project Name"]}}</h2>
+            <p>{{place.Address}}</p>
+            <i class="icon ion-chevron-right icon-accessory"></i>
+          </a>
+        </div>
       </div>
     </ion-list>
   </ion-content>

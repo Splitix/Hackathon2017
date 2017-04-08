@@ -26,6 +26,12 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 app.use(express.static(__dirname + '/public'));
 app.use('/node_modules', express.static(__dirname + '/node_modules'));
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 // Mongoose stuff ===========================================
 // connect to our mongoDB database
 mongoose.connect('mongodb://localhost:27017/txsthack');
@@ -86,9 +92,34 @@ var housingSchema = new mongoose.Schema({
  var Housing = mongoose.model('Housing', housingSchema);
 
 // API Endpoints ===========================================
-// Profile ==============================================
+// All Points ==============================================
 app.get('/getPoints', function (req, res) {
     Housing.find({}, function(err, e){res.send(e);});
+});
+
+// Search with filters
+app.get('/search', function(req, res) {
+    var filters = {};
+    if(req.query.zip != undefined)
+    {
+        filters["Zip Code"] = req.query.zip;
+    }
+    if(req.query.bus != undefined)
+    {
+        filters["Distance to Bus Stop"] = req.query.bus;
+    }
+    if(req.query.dev != undefined)
+    {
+        filters["Developer"] = new RegExp('^'+req.query.dev+'$', "i");
+    }
+    if(req.query.type != undefined)
+    {
+        filters["Unit Type"] = req.query.type;
+    }
+
+    Housing.find(filters, function(err, results) {
+        res.send(results);
+    });        
 });
 
 // Server Start ==========================================

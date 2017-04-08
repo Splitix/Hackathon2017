@@ -26,7 +26,7 @@ angular.module('starter.controllers', [])
       console.log("Successfully retrieved " + res.data.length + " houses.");
       console.log(res.data);
      var images = ['apartment.png', 'apartment1.png', 'apartment2.png', 'apartment3.png',
-      'home1.png', 'home2.png', 'home3.png', 'home4.png'];
+      'home1.png', 'home2.png', 'home4.png'];
       
 
       for(var i = 0; i < res.data.length; i++) {

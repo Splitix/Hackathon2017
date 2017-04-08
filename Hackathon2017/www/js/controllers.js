@@ -129,7 +129,6 @@ angular.module('starter.controllers', [])
       console.log("Successfully retrieved " + res.data.length + " houses.");
       console.log(res.data);
       $rootScope.results = res.data;
-      location.reload();
     })
     // .fail(function (err) {
     //   console.log("Failed to retrieve posts.");

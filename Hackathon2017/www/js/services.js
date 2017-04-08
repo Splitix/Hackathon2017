@@ -1,11 +1,8 @@
 angular.module('starter.services', [])
 
-.service("HousingService", function() {
+.service("HousingService", function($http) {
   this.GetPoints = function() {
-    return jQuery.get({
-          method: 'GET',
-          url: 'http://52.35.144.231:4001/getpoints',
-      });
+    return $http.get('http://52.35.144.231:4001/getpoints');
   }
   this.SearchHousing = function(address, zip, bus, dev, type) {
     var address = (address == undefined || address == "") ? "" : "address="+address; 
@@ -27,10 +24,7 @@ angular.module('starter.services', [])
       }
     }
 
-    return jQuery.get({
-          method: 'GET',
-          url: list[0]
-      });
+    return $http.get(list[0]);
   }
 })
 .factory('Places', function() {

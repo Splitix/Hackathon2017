@@ -8,7 +8,7 @@
 
 
 <ion-view>
-  <ion-nav-title>{{place.name}}</ion-nav-title>
+  <ion-nav-title>{{place["Project Name"]}}</ion-nav-title>
   	<ion-nav-buttons side="left">
     	<button class="button back-button button-clear header-item" ng-click="goBack()">
       	<i class="icon ion-ios-arrow-back"> Back</i>
@@ -18,10 +18,10 @@
   <ion-content>
       <img id="img-home" ng-src="{{place.picture}}">
       <div>
-        <b style="font-size:32px;padding:0 0 0 15px;">{{place.name}}</b>
+        <b style="font-size:32px;padding:0 0 0 15px;">{{place["Project Name"]}}</b>
       </div>
       <div style="padding:0 0 0 15px;">
-        <p>123 Apple St, Austin, TX 78967</p>
+        <p>{{place.Address}} {{place["Zip Code"]}}</p>
         <table>
           <col width="130">
           <tr>
@@ -33,7 +33,7 @@
             <td>School District</td>
           </tr>
           <tr>
-            <td>3 Miles from bus</td>
+            <td>{{place["Distance from Bus"]}} from bus</td>
             <td></td>
           </tr>
         </table>

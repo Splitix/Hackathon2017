@@ -82,6 +82,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
   })
 
+  .state('tab.resources', {
+    url: '/resources',
+    views: {
+      'tab-resources': {
+        templateUrl: 'templates/tab-resources.html',
+        controller: 'ResourcesCtrl'
+      }
+    }
+  })
+
   .state('tab.map', {
     url: '/map',
     views: {

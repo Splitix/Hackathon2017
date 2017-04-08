@@ -43,6 +43,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       controller: 'LoginCtrl'
   })
 
+  .state('filters', {
+    url: '/filters',
+    templateUrl: 'templates/tab-filters.html',
+    controller: 'FiltersCtrl'
+  })
+
   // setup an abstract state for the tabs directive
     .state('tab', {
     url: '/tab',
@@ -62,22 +68,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
   })
 
-  .state('tab.account', {
-    url: '/account',
+  .state('tab.settings', {
+    url: '/settings',
     views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
-      }
-    }
-  })
-
-  .state('tab.qualify', {
-    url: '/qualify',
-    views: {
-      'tab-qualify': {
-        templateUrl: 'templates/tab-qualify.html',
-        controller: 'QualifyCtrl'
+      'tab-settings': {
+        templateUrl: 'templates/tab-settings.html',
+        controller: 'SettingsCtrl'
       }
     }
   })

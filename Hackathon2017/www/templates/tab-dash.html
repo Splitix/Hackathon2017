@@ -1,6 +1,7 @@
-<ion-view view-title="Dashboard">
+<ion-view view-title="Hives">
   <ion-content>
     <ion-list>
+      <a href="#/filters" class="button button-full icon-right ion-ios-settings filter-menu">Filters </a>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="place in places" type="item-text-wrap" href="#/places/{{place.id}}">
         <img ng-src="{{place.face}}">
         <h2>{{place.name}}</h2>

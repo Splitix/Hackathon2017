@@ -1,2 +1,4 @@
 Database/node_modules/
 Database/mongoData/
+
+.DS_Store

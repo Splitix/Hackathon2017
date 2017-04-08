@@ -1,6 +1,11 @@
-body, div.scroll, ion-content {
+ion-content {
     background-color: #e4f0f2!important;
     color: #69160f!important;
+}
+
+@font-face {
+    font-family: 'Sailors';
+    src: url("../fonts/Sailors.otf") format("opentype");
 }
 
 h1,
@@ -9,9 +14,12 @@ h3,
 h4,
 h5,
 h6,
-p,
-.nav-bar-title,
-div.item-divider {
+.title {
+  color: #69160f!important;
+  font-family: 'Sailors', 'Roboto Condensed', sans-serif;
+}
+
+p, .nav-bar-title, div.item-divider {
   color: #69160f!important;
 }
 
@@ -45,7 +53,7 @@ button, a.button {
   background-color: #F29B0F!important;
 }
 
-.back-button {
+.back-button, .button-clear {
   background: transparent!important;
   color: #F29B0F!important;
 }
@@ -62,9 +70,28 @@ input[type=text], input[type=number] {
   text-align: left;
 }
 
-img {
+.property {
+  background-color: #fff;
+}
+
+.property-header {
+  text-align: center;
+  padding-top: 5px;
+}
+
+.property-body {
+  padding: 0 0 0 15px;
+}
+
+#img-home {
     width: 100%;
     height: auto;
+}
+
+#img-a {
+    width: 70%;
+    height: auto;
+    margin: 30px 0 30px 0;
 }
 
 .scroll {
@@ -80,8 +107,8 @@ img {
     display: -webkit-flex;
     -webkit-flex-direction: column;
     height: 100%;
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#efad62), color-stop(100%,#f7d47c));
-    background: -webkit-linear-gradient(top, #efad62 0%,#f7d47c 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(180, 203, 211)), color-stop(100%,#ffff));
+    background: -webkit-linear-gradient(top, #fff 0%,#b4cbd3 100%);
 }
 .transparent-a {
   zoom: 1;
@@ -137,6 +164,6 @@ img {
   height: auto;
   width: 250px;
   border-radius: 15px;
-  background-color: #000;
+  background-color: #1d2d44;
 
 }

@@ -49,22 +49,31 @@
             Womp womp... your income is a bit too high. Check out the <a href="#/tab/resources">Resources</a> to get more info.
           </p>
         </div>
-        <form>
+        <form ng-submit="applyFilters()">
           <label class="item item-input">
-            <input type="number" placeholder="zip code" ng-model="zip">
+            <input type="number" placeholder="zip code" ng-model="filter_form.zip">
           </label>
           <label class="item item-input">
-            <input type="number" placeholder="distance to bus stop" ng-model="bus_stop">
+            <input type="text" placeholder="developer" ng-model="filter_form.dev">
           </label>
-          <label class="item item-input">
-            <input type="text" placeholder="developer" ng-model="developer">
+          <label class="item item-input item-select">
+            <div class="input-label">
+              distance to bus stop
+            </div>
+            <select ng-model="filter_form.bus">
+              <option selected></option>
+              <option>Neither</option>
+              <option>1/2 Mile</option>
+              <option>1/4 Mile</option>
+            </select>
           </label>
           <label class="item item-input item-select">
             <div class="input-label">
               unit type
             </div>
-            <select>
-              <option selected>Single Family</option>
+            <select ng-model="filter_form.type">
+              <option selected></option>              
+              <option>Single Family</option>
               <option>Multifamily</option>
               <option>Duplex</option>
               <option>Fourplex</option>

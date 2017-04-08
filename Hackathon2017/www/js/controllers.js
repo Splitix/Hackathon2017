@@ -1,16 +1,25 @@
 angular.module('starter.controllers', [])
 
-
-.controller('DashCtrl', function($scope, Places) {
-  $scope.places = Places.all();
-  $scope.remove = function(place) {
-    Places.remove(place);
-  };
-})
-
 .controller('LoginCtrl', function($scope) {
-
-
+  
+})
+.controller('DashCtrl', function($scope, $rootScope, HousingService) {
+  $scope.places = $rootScope.results;
+  $scope.doRefresh = function() {
+    HousingService.SearchHousing("","","","","")
+    .done(function(data) {
+      console.log("Successfully retrieved " + data.length + " houses.");
+      console.log(data);
+      $rootScope.results = data;
+      $scope.places = $rootScope.results;
+      $scope.$broadcast('scroll.refreshComplete');
+    })
+    .fail(function (err) {
+      console.log("Failed to retrieve posts.");
+      console.log(err);
+       $scope.$broadcast('scroll.refreshComplete');
+    })
+  }
 })
 
 .controller('PlaceDetailCtrl', function($scope, $stateParams, Places, $ionicHistory) {
@@ -25,18 +34,9 @@ angular.module('starter.controllers', [])
   $scope.settings = {
     enableFriends: true
   }
-  HousingService.GetPoints()
-  .done(function(data) {
-    console.log("Successfully retrieved posts.");
-    console.log(data);
-    $scope.points = data;
-  })
-  .fail(function (err) {
-    console.log("Failed to retrieve posts.");
-    console.log(err);
-  });
 })
-.controller('FiltersCtrl', function($scope, $ionicHistory) {
+
+.controller('FiltersCtrl', function($scope, $rootScope, $ionicHistory, HousingService) {
   // Set default state
   $scope.filters = true;
   $scope.qualify = true;
@@ -47,10 +47,11 @@ angular.module('starter.controllers', [])
   $scope.goBack = function(){
     $ionicHistory.goBack();
   }
+  $scope.filter_form = {};
 
   $scope.showMoreInfo = function() {
     $scope.more_info = !$scope.more_info;
-    $scope.more_info_link = $scope.more_info ? "Learn More" : "Close"
+    $scope.more_info_link = $scope.more_info ? "Learn More" : "Close";
   }
 
   $scope.resetQualify = function() {
@@ -91,17 +92,36 @@ angular.module('starter.controllers', [])
     localStorage.setItem('household', household);
   }
 
+  $scope.applyFilters = function() {
+    if($scope.filter_form == undefined)
+    {
+      return;
+    }
+
+    HousingService.SearchHousing($scope.filter_form.address, $scope.filter_form.zip, $scope.filter_form.bus, $scope.filter_form.dev, $scope.filter_form.type)
+    .done(function(data) {
+      console.log("Successfully retrieved " + data.length + " houses.");
+      console.log(data);
+      $rootScope.results = data;
+    })
+    .fail(function (err) {
+      console.log("Failed to retrieve posts.");
+      console.log(err);
+    })
+    .finally(function() {
+       // Stop the ion-refresher from spinning
+       $scope.$broadcast('scroll.refreshComplete');
+     });
+  }
+
 })
-
-.controller('SettingsCtrl', function($scope) {
-
-})
-
 
 .controller('ResourcesCtrl', function($scope) {
-
+  
 })
-
+.controller('SettingsCtrl', function($scope) {
+  
+})
 .controller('MapCtrl', function($scope, $ionicLoading) {
     $scope.show = function() {
       $ionicLoading.show({

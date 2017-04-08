@@ -7,8 +7,32 @@ angular.module('starter.services', [])
           url: 'http://52.35.144.231:4001/getpoints',
       });
   }
-})
+  this.SearchHousing = function(address, zip, bus, dev, type) {
+    var address = (address == undefined || address == "") ? "" : "address="+address; 
+    var zip = (zip == undefined || zip == "") ? "" : "zip="+zip; 
+    var bus = (bus == undefined || bus == "") ? "" : "bus="+bus; 
+    var dev = (dev == undefined || dev == "") ? "" : "dev="+dev; 
+    var type = (type == undefined || type == "") ? "" : "type="+type;
 
+    var first = true;
+    var list = ['http://localhost:4001/search', address, zip, bus, dev, type];
+    for(var i = 1; i < list.length; i++)
+    {
+      if(first && list[i] != "")  {
+        list[0] = list[0] + "?" + list[i];
+        first = false;
+      }
+      else if(list[i] != "") {
+        list[0] = list[0] +"&" + list[i];
+      }
+    }
+
+    return jQuery.get({
+          method: 'GET',
+          url: list[0]
+      });
+  }
+})
 .factory('Places', function() {
   // Might use a resource here that returns a JSON array
 

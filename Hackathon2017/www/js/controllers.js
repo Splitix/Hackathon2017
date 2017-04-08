@@ -3,16 +3,32 @@ angular.module('starter.controllers', [])
 .controller('LoginCtrl', function($scope) {
   
 })
-.controller('DashCtrl', function($scope, $rootScope, HousingService) {
+.controller('DashCtrl', function($scope, $rootScope, $ionicLoading, HousingService) {
+  $scope.show = function() {
+      $ionicLoading.show({
+        template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+      });
+    };
+
+    $scope.hide = function(){
+        $ionicLoading.hide();
+    };
+
+  $scope.show($ionicLoading);
   $scope.places = $rootScope.results;
+  $rootScope.filter_form = {};
+  $rootScope.filter_form.address = "", $rootScope.filter_form.zip = "", 
+  $rootScope.filter_form.bus = "", $rootScope.filter_form.dev = "", 
+  $rootScope.filter_form.type = "";
   $scope.doRefresh = function() {
-    HousingService.SearchHousing("","","","","")
+    HousingService.SearchHousing($rootScope.filter_form.address, $rootScope.filter_form.zip, $rootScope.filter_form.bus, $rootScope.filter_form.dev, $rootScope.filter_form.type)
     .done(function(data) {
       console.log("Successfully retrieved " + data.length + " houses.");
       console.log(data);
       $rootScope.results = data;
       $scope.places = $rootScope.results;
       $scope.$broadcast('scroll.refreshComplete');
+      $scope.hide();
     })
     .fail(function (err) {
       console.log("Failed to retrieve posts.");
@@ -20,6 +36,8 @@ angular.module('starter.controllers', [])
        $scope.$broadcast('scroll.refreshComplete');
     })
   }
+  // initial refresh
+   $scope.doRefresh();
 })
 
 .controller('PlaceDetailCtrl', function($scope, $stateParams, Places, $ionicHistory) {
@@ -47,7 +65,7 @@ angular.module('starter.controllers', [])
   $scope.goBack = function(){
     $ionicHistory.goBack();
   }
-  $scope.filter_form = {};
+  
 
   $scope.showMoreInfo = function() {
     $scope.more_info = !$scope.more_info;
@@ -93,12 +111,12 @@ angular.module('starter.controllers', [])
   }
 
   $scope.applyFilters = function() {
-    if($scope.filter_form == undefined)
+    if($rootScope.filter_form == undefined)
     {
       return;
     }
 
-    HousingService.SearchHousing($scope.filter_form.address, $scope.filter_form.zip, $scope.filter_form.bus, $scope.filter_form.dev, $scope.filter_form.type)
+    HousingService.SearchHousing($rootScope.filter_form.address, $rootScope.filter_form.zip, $rootScope.filter_form.bus, $rootScope.filter_form.dev, $rootScope.filter_form.type)
     .done(function(data) {
       console.log("Successfully retrieved " + data.length + " houses.");
       console.log(data);

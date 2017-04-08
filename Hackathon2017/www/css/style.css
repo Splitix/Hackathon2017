@@ -8,13 +8,18 @@ ion-content {
     src: url("../fonts/Sailors.otf") format("opentype");
 }
 
+@font-face {
+  font-family: 'Hillda';
+  src: url("../fonts/Hillda.otf") format("opentype");
+}
+
 h1,
 h2,
 h3,
 h4,
 h5,
 h6,
-.title {
+.title, span.nav-bar-title {
   color: #69160f!important;
   font-family: 'Sailors', 'Roboto', sans-serif;
 }
@@ -30,6 +35,10 @@ p, .nav-bar-title, div.item-divider {
 
 ion-header-bar, div.tab-nav, div.item-divider {
   background-color: #fff!important;
+}
+
+a.login-btn  {
+  font-family: 'Sailors';
 }
 
 div.item-divider {
@@ -71,8 +80,21 @@ button, a.button {
   color: #fff!important;
 }
 
-input[type=text], input[type=number] {
-  text-align: left;
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font-family: 'Sailors';
+}
+::-moz-placeholder { /* Firefox 19+ */
+  font-family: 'Sailors';
+}
+:-ms-input-placeholder { /* IE 10+ */
+  font-family: 'Sailors';
+}
+:-moz-placeholder { /* Firefox 18- */
+  font-family: 'Sailors';
+}
+
+div.status {
+  font-family: 'Hillda';
 }
 
 .dash-img {

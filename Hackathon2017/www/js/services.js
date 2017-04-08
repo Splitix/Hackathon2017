@@ -7,6 +7,12 @@ angular.module('starter.services', [])
           url: 'http://52.35.144.231:4001/getpoints',
       });
   }
+  this.SearchHousing = function(address, zip, bus, dev, type) {
+    return jQuery.get({
+          method: 'GET',
+          url: 'http://52.35.144.231:4001/search?address='+address+'&zip='+zip+'&bus='+bus+'&dev='+dev+'&type='+type
+      });
+  }
 })
 
 .factory('Places', function() {

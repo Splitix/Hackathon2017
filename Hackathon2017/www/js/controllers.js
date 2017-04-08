@@ -28,10 +28,20 @@ angular.module('starter.controllers', [])
   }
 })
 
-.controller('AccountCtrl', function($scope) {
+.controller('AccountCtrl', function($scope, HousingService) {
   $scope.settings = {
     enableFriends: true
   }
+  HousingService.GetPoints()
+  .done(function(data) {
+    console.log("Successfully retrieved posts.");
+    console.log(data);
+    $scope.points = data;
+  })
+  .fail(function (err) {
+    console.log("Failed to retrieve posts.");
+    console.log(err);
+  });
 })
 
 .controller('QualifyCtrl', function($scope) {

@@ -1,5 +1,14 @@
 angular.module('starter.services', [])
 
+.service("HousingService", function() {
+  this.GetPoints = function() {
+    return jQuery.get({
+          method: 'GET',
+          url: 'http://52.35.144.231:4001/getpoints',
+      });
+  }
+})
+
 .factory('Places', function() {
   // Might use a resource here that returns a JSON array
 

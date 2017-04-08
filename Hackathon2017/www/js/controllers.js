@@ -1,10 +1,10 @@
 angular.module('starter.controllers', [])
 
 
-.controller('DashCtrl', function($scope, Chats) {
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
+.controller('DashCtrl', function($scope, Places) {
+  $scope.places = Places.all();
+  $scope.remove = function(place) {
+    Places.remove(place);
   };
 })
 
@@ -20,8 +20,12 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
+.controller('PlaceDetailCtrl', function($scope, $stateParams, Places, $ionicHistory) {
+  $scope.place = Places.get($stateParams.placeId);
+
+  $scope.goBack = function(){
+    $ionicHistory.goBack();
+  }
 })
 
 .controller('AccountCtrl', function($scope) {

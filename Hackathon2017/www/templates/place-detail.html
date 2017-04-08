@@ -4,11 +4,21 @@
   The FriendsCtrl pulls data from the Friends service (service.js)
   The Friends service returns an array of friend data
 -->
-<ion-view view-title="{{chat.name}}">
+
+
+
+<ion-view>
+  <ion-nav-title>{{place.name}}</ion-nav-title>
+  	<ion-nav-buttons side="left">
+    	<button class="button back-button button-clear header-item" ng-click="goBack()">
+      	<i class="icon ion-ios-arrow-back"> Back</i>
+    	</button>
+  	</ion-nav-buttons>
+
   <ion-content>
-      <img ng-src="{{chat.picture}}">
+      <img ng-src="{{place.picture}}">
       <div>
-        <b style="font-size:24px;padding:0 0 0 15px;">{{chat.name}}</b>
+        <b style="font-size:32px;padding:0 0 0 15px;">{{place.name}}</b>
       </div>
       <div style="padding:0 0 0 15px;">
         <p>123 Apple St, Austin, TX 78967</p>
@@ -20,13 +30,14 @@
           </tr>
           <tr>
             <td>1925 sqft</td>
-            <td></td>
+            <td>School District</td>
           </tr>
           <tr>
-            <td></td>
+            <td>3 Miles from bus</td>
             <td></td>
           </tr>
         </table>
+        <br />
         <p>Brand new apartment, completely renovated in 2012 and tastefully
            furnished, with attention to details, modern colours, designer
            lighting and high quality accessories. Located in the centre of

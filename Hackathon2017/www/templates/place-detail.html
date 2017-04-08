@@ -16,11 +16,12 @@
   	</ion-nav-buttons>
 
   <ion-content>
-      <img id="img-home" ng-src="{{place.picture}}">
-      <div>
-        <b style="font-size:32px;padding:0 0 0 15px;">{{place["Project Name"]}}</b>
+    <div class="list card">
+      <img class="item item-image" id="img-home" ng-src="{{place.picture}}">
+      <div class="item item-body">
+        <h3>{{place["Project Name"]}}</h3>
       </div>
-      <div style="padding:0 0 0 15px;">
+      <div class="item item-body">
         <p>{{place.Address}} {{place["Zip Code"]}}</p>
         <table>
           <col width="130">

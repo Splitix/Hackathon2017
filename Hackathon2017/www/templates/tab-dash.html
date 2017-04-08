@@ -3,6 +3,7 @@
     <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
     <ion-list>
       <a href="#/filters" class="button button-full icon-right ion-ios-settings filter-menu">Filters </a>
+      <p class="button button-full">Hives found: {{resultsFound}}</p>
       <div class="item item-icon-right" ng-repeat="place in places" type="item-text-wrap">
         <img class="item item-avatar" style="max-height: 75px;" ng-src="{{place.img}}"/>
         <a class="list card" href="#/places/{{place.id}}">

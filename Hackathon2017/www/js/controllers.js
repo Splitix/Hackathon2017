@@ -15,6 +15,7 @@ angular.module('starter.controllers', [])
     };
 
   $scope.show($ionicLoading);
+  $rootScope.resultsFound = 0;  
   $scope.places = $rootScope.results;
   $rootScope.filter_form = {};
   $rootScope.filter_form.address = "", $rootScope.filter_form.zip = "", 
@@ -23,8 +24,7 @@ angular.module('starter.controllers', [])
   $scope.doRefresh = function() {
     HousingService.SearchHousing($rootScope.filter_form.address, $rootScope.filter_form.zip, $rootScope.filter_form.bus, $rootScope.filter_form.dev, $rootScope.filter_form.type)
     .then(function(res) {
-      console.log("Successfully retrieved " + res.data.length + " houses.");
-      console.log(res.data);
+      $rootScope.resultsFound = res.data.length;
      var images = ['apartment.png', 'apartment1.png', 'apartment2.png', 'apartment3.png',
       'home1.png', 'home2.png', 'home4.png'];
       
@@ -38,11 +38,6 @@ angular.module('starter.controllers', [])
       $scope.$broadcast('scroll.refreshComplete');
       $scope.hide();
     })
-    // .fail(function (err) {
-    //   console.log("Failed to retrieve posts.");
-    //   console.log(err);
-    //    $scope.$broadcast('scroll.refreshComplete');
-    // })
   }
   // initial refresh
    $scope.doRefresh();
@@ -126,14 +121,9 @@ angular.module('starter.controllers', [])
 
     HousingService.SearchHousing($rootScope.filter_form.address, $rootScope.filter_form.zip, $rootScope.filter_form.bus, $rootScope.filter_form.dev, $rootScope.filter_form.type)
     .then(function(res) {
-      console.log("Successfully retrieved " + res.data.length + " houses.");
-      console.log(res.data);
+      $rootScope.resultsFound = res.data.length;
       $rootScope.results = res.data;
-    })
-    // .fail(function (err) {
-    //   console.log("Failed to retrieve posts.");
-    //   console.log(err);
-    // });
+    });
   }
 })
 
@@ -185,5 +175,4 @@ angular.module('starter.controllers', [])
       google.maps.event.trigger($scope.map, "resize");
     });
     }, 500);
-
 });

@@ -17,38 +17,35 @@
 
   <ion-content>
       <img id="img-home" ng-src="{{place.picture}}">
-      <div>
-        <b style="font-size:32px;padding:0 0 0 15px;">{{place.name}}</b>
-      </div>
-      <div style="padding:0 0 0 15px;">
-        <p>123 Apple St, Austin, TX 78967</p>
-        <table>
-          <col width="130">
-          <tr>
-            <td>3 Bedroom</td>
-            <td>2 Bath</td>
-          </tr>
-          <tr>
-            <td>1925 sqft</td>
-            <td>School District</td>
-          </tr>
-          <tr>
-            <td>3 Miles from bus</td>
-            <td></td>
-          </tr>
-        </table>
-        <br />
-        <p>Brand new apartment, completely renovated in 2012 and tastefully
-           furnished, with attention to details, modern colours, designer
-           lighting and high quality accessories. Located in the centre of
-           Trastevere, perfect for those looking for a functional and high
-           standard accommodation. </p>
+      <div class="property">
+        <div class="property-header">
+          <h3>{{place.name}}</h3>
+        </div>
+        <div  class="property-body">
+          <p>123 Apple St, Austin, TX 78967</p>
+          <table>
+            <col width="130">
+            <tr>
+              <td>3 Bedroom</td>
+              <td>2 Bath</td>
+            </tr>
+            <tr>
+              <td>1925 sqft</td>
+              <td>School District</td>
+            </tr>
+            <tr>
+              <td>3 Miles from bus</td>
+              <td></td>
+            </tr>
+          </table>
+          <br />
+          <p>Brand new apartment, completely renovated in 2012 and tastefully
+             furnished, with attention to details, modern colours, designer
+             lighting and high quality accessories. Located in the centre of
+             Trastevere, perfect for those looking for a functional and high
+             standard accommodation. </p>
 
+        </div>
       </div>
-      <center>
-        <button class="button button-large button-balanced">
-          You quailfy for this place
-        </button>
-      </center>
   </ion-content>
 </ion-view>

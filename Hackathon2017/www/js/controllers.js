@@ -93,7 +93,7 @@ angular.module('starter.controllers', [])
     };
 
     $scope.show($ionicLoading);
-    google.maps.event.addDomListener(window, 'load', function() {
+    setTimeout(function() {
         var myLatlng = new google.maps.LatLng(30.2672, -97.7431);
 
         var mapOptions = {
@@ -115,6 +115,13 @@ angular.module('starter.controllers', [])
 
         $scope.map = map;
         $scope.hide($ionicLoading);
+
+        google.maps.event.addDomListener(window, 'resize', function() {
+          var center = $scope.map.getCenter();
+          $scope.map.setCenter(center);
+      // And aditionally you can need use "trigger" for real responsive
+      google.maps.event.trigger($scope.map, "resize");
     });
+    }, 500);
 
 });

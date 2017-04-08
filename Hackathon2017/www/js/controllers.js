@@ -1,5 +1,8 @@
 angular.module('starter.controllers', [])
 
+.controller('LoginCtrl', function($scope) {
+  
+})
 .controller('DashCtrl', function($scope, $rootScope, HousingService) {
   $scope.places = $rootScope.results;
   $scope.doRefresh = function() {

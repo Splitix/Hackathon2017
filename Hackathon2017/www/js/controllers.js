@@ -125,13 +125,8 @@ angular.module('starter.controllers', [])
     .fail(function (err) {
       console.log("Failed to retrieve posts.");
       console.log(err);
-    })
-    .finally(function() {
-       // Stop the ion-refresher from spinning
-       $scope.$broadcast('scroll.refreshComplete');
-     });
+    });
   }
-
 })
 
 .controller('ResourcesCtrl', function($scope) {

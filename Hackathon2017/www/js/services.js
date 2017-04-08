@@ -15,7 +15,7 @@ angular.module('starter.services', [])
     var type = (type == undefined || type == "") ? "" : "type="+type;
 
     var first = true;
-    var list = ['http://localhost:4001/search', address, zip, bus, dev, type];
+    var list = ['http://52.35.144.231:4001/search', address, zip, bus, dev, type];
     for(var i = 1; i < list.length; i++)
     {
       if(first && list[i] != "")  {

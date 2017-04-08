@@ -8,18 +8,6 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('ChatsCtrl', function($scope, Chats) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
-
-
-})
-
 .controller('PlaceDetailCtrl', function($scope, $stateParams, Places, $ionicHistory) {
   $scope.place = Places.get($stateParams.placeId);
 
@@ -45,28 +33,68 @@ angular.module('starter.controllers', [])
 })
 
 .controller('QualifyCtrl', function($scope) {
+  // Set modal/main default state
+  $scope.modal = true;
+  $scope.main = true;
+  $scope.status = 'You may not qualify now but...';
   $scope.more_info_link = "Learn More";
   $scope.more_info = true;
+
   $scope.showMoreInfo = function() {
     $scope.more_info = !$scope.more_info;
     $scope.more_info_link = $scope.more_info ? "Learn More" : "See less"
-  };
+  }
 
-  $scope.qualifyIncome = function(income) {
+  $scope.qualifyIncome = function(income, household) {
+    // Toggle modal/main view
+    $scope.modal = false;
+    $scope.main = false;
+
     qualifiedStatus = false;
-    // http://www.austintexas.gov/sites/default/files/files/2016_HOME_HUD_MFI_Limits_Eff_6-6-16__NHCD_FINAL.pdf
-    if (income < 77800) {
+    let median;
+
+    switch(household) {
+      case 0:
+      case 1: median = 43600;
+      case 2: median = 49800;
+      case 3: median = 56050;
+      case 4: median = 62250;
+      case 5: median = 67250;
+      case 6: median = 72250;
+      case 7: median = 77200;
+      default: median = 82200;
+    }
+
+    if (income < median) {
+      // http://www.austintexas.gov/sites/default/files/files/2016_HOME_HUD_MFI_Limits_Eff_6-6-16__NHCD_FINAL.pdf
       qualifiedStatus = true;
+      $scope.status = 'Congrats! You qualify!'
     }
 
     localStorage.setItem('qualified', qualifiedStatus);
+    localStorage.setItem('income', income);
+    localStorage.setItem('household', household);
   }
 })
 
-.controller('MapCtrl', function($scope, $ionicLoading) {
+.controller('ResourcesCtrl', function($scope) {
+  
+})
 
+.controller('MapCtrl', function($scope, $ionicLoading) {
+    $scope.show = function() {
+      $ionicLoading.show({
+        template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+      });
+    };
+
+    $scope.hide = function(){
+        $ionicLoading.hide();
+    };
+
+    $scope.show($ionicLoading);
     google.maps.event.addDomListener(window, 'load', function() {
-        var myLatlng = new google.maps.LatLng(37.3000, -120.4833);
+        var myLatlng = new google.maps.LatLng(30.2672, -97.7431);
 
         var mapOptions = {
             center: myLatlng,
@@ -86,6 +114,7 @@ angular.module('starter.controllers', [])
         });
 
         $scope.map = map;
+        $scope.hide($ionicLoading);
     });
 
 });

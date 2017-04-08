@@ -36,24 +36,33 @@ angular.module('starter.controllers', [])
     console.log(err);
   });
 })
-
-.controller('QualifyCtrl', function($scope) {
-  // Set modal/main default state
-  $scope.modal = true;
-  $scope.main = true;
-  $scope.status = 'You may not qualify now but...';
+.controller('FiltersCtrl', function($scope, $ionicHistory) {
+  // Set default state
+  $scope.filters = true;
+  $scope.qualify = true;
+  $scope.status = "You don't qualify at this time";
   $scope.more_info_link = "Learn More";
   $scope.more_info = true;
 
+  $scope.goBack = function(){
+    $ionicHistory.goBack();
+  }
+
   $scope.showMoreInfo = function() {
     $scope.more_info = !$scope.more_info;
-    $scope.more_info_link = $scope.more_info ? "Learn More" : "See less"
+    $scope.more_info_link = $scope.more_info ? "Learn More" : "Close"
+  }
+
+  $scope.resetQualify = function() {
+    localStorage.setItem('qualified', null);
+    localStorage.setItem('income', null);
+    localStorage.setItem('household', null);
   }
 
   $scope.qualifyIncome = function(income, household) {
-    // Toggle modal/main view
-    $scope.modal = false;
-    $scope.main = false;
+    // Toggle filters/qualify view
+    $scope.filters = false;
+    $scope.qualify = false;
 
     qualifiedStatus = false;
     let median;
@@ -74,13 +83,20 @@ angular.module('starter.controllers', [])
       // http://www.austintexas.gov/sites/default/files/files/2016_HOME_HUD_MFI_Limits_Eff_6-6-16__NHCD_FINAL.pdf
       qualifiedStatus = true;
       $scope.status = 'Congrats! You qualify!'
+      $scope.not_qualified = true;
     }
 
     localStorage.setItem('qualified', qualifiedStatus);
     localStorage.setItem('income', income);
     localStorage.setItem('household', household);
   }
+
 })
+
+.controller('SettingsCtrl', function($scope) {
+
+})
+
 
 .controller('ResourcesCtrl', function($scope) {
 

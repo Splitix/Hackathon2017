@@ -1,0 +1,84 @@
+<ion-view >
+  <ion-nav-title>Filters</ion-nav-title>
+  	<ion-nav-buttons side="left">
+    	<button class="button back-button button-clear header-item" ng-click="goBack()">
+      	<i class="icon ion-ios-arrow-back"> Back</i>
+    	</button>
+  	</ion-nav-buttons>
+  <ion-content>
+
+    <div class="list card" ng-show="qualify">
+      <div class="item item-text-wrap">
+        <p>
+          The first step is to find out if you qualify for Affordable Housing.
+        </p>
+        <button class="button button-clear button-positive more-info-btn" ng-click="showMoreInfo()">
+          {{more_info_link}}
+        </button>
+      </div>
+      <div class="item item-body more-info" ng-hide="more_info">
+        <p>
+          Check your annual household income against the latest income limits for HOME and CDBG respectively set by the U.S. Department of Housing and Urban Development (HUD). The numbers are based on the HUD median family income (called MFI for short) in the Austin-Round Rock-San Marcos area. Learn more about the methodology for setting income limits, or read more about rent and income limits issued by the Texas Department of Housing and Community Affairs.
+        </p>
+      </div>
+
+      <div class="item item-body">
+        <div class="list list-inset">
+          <form ng-submit="qualifyIncome(income, household)">
+            <label class="item item-input">
+              <input type="number" placeholder="# in Household" ng-model="household" required>
+            </label>
+            <label class="item item-input">
+              <input type="number" placeholder="$ Annual Household Income" ng-model="income" required>
+            </label>
+            <br />
+            <button-bar>
+              <input type="reset" class="button button-clear ion-refresh button-positive" ng-click="resetQualify" value="Reset"/>
+              <button type="submit" class="button button-energized qualify-btn">Qualify</button>
+            </button-bar>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="list card" ng-hide="filters">
+      <div class="item item-body">
+        <div class="item item-divider">
+          {{ status }}
+          <p ng-hide="not_qualified">
+            Womp womp... your income is a bit too high. Check out the <a href="#/tab/resources">Resources</a> to get more info.
+          </p>
+        </div>
+        <form>
+          <label class="item item-input">
+            <input type="number" placeholder="zip code" ng-model="zip">
+          </label>
+          <label class="item item-input">
+            <input type="number" placeholder="distance to bus stop" ng-model="bus_stop">
+          </label>
+          <label class="item item-input">
+            <input type="text" placeholder="developer" ng-model="developer">
+          </label>
+          <label class="item item-input item-select">
+            <div class="input-label">
+              unit type
+            </div>
+            <select>
+              <option selected>Single Family</option>
+              <option>Multifamily</option>
+              <option>Duplex</option>
+              <option>Fourplex</option>
+              <option>ADU</option>
+            </select>
+          </label>
+
+          <br  />
+          <button-bar>
+            <input type="reset" class="button button-clear ion-refresh button-positive" ng-click="resetFilters" value="Reset"/>
+            <button type="submit" class="button button-energized qualify-btn">Update Filters</button>
+          </button-bar>
+        </form>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

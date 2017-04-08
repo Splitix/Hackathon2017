@@ -22,19 +22,27 @@ angular.module('starter.controllers', [])
   $rootScope.filter_form.type = "";
   $scope.doRefresh = function() {
     HousingService.SearchHousing($rootScope.filter_form.address, $rootScope.filter_form.zip, $rootScope.filter_form.bus, $rootScope.filter_form.dev, $rootScope.filter_form.type)
-    .done(function(data) {
-      console.log("Successfully retrieved " + data.length + " houses.");
-      console.log(data);
-      $rootScope.results = data;
+    .then(function(res) {
+      console.log("Successfully retrieved " + res.data.length + " houses.");
+      console.log(res.data);
+     var images = ['apartment.png', 'apartment1.png', 'apartment2.png', 'apartment3.png',
+      'home1.png', 'home2.png', 'home3.png', 'home4.png'];
+      
+
+      for(var i = 0; i < res.data.length; i++) {
+        res.data[i].img = 'img/' + images[Math.floor(Math.random() * images.length)];
+      }
+      $rootScope.results = res.data;
+
       $scope.places = $rootScope.results;
       $scope.$broadcast('scroll.refreshComplete');
       $scope.hide();
     })
-    .fail(function (err) {
-      console.log("Failed to retrieve posts.");
-      console.log(err);
-       $scope.$broadcast('scroll.refreshComplete');
-    })
+    // .fail(function (err) {
+    //   console.log("Failed to retrieve posts.");
+    //   console.log(err);
+    //    $scope.$broadcast('scroll.refreshComplete');
+    // })
   }
   // initial refresh
    $scope.doRefresh();
@@ -117,15 +125,16 @@ angular.module('starter.controllers', [])
     }
 
     HousingService.SearchHousing($rootScope.filter_form.address, $rootScope.filter_form.zip, $rootScope.filter_form.bus, $rootScope.filter_form.dev, $rootScope.filter_form.type)
-    .done(function(data) {
-      console.log("Successfully retrieved " + data.length + " houses.");
-      console.log(data);
-      $rootScope.results = data;
+    .then(function(res) {
+      console.log("Successfully retrieved " + res.data.length + " houses.");
+      console.log(res.data);
+      $rootScope.results = res.data;
+      location.reload();
     })
-    .fail(function (err) {
-      console.log("Failed to retrieve posts.");
-      console.log(err);
-    });
+    // .fail(function (err) {
+    //   console.log("Failed to retrieve posts.");
+    //   console.log(err);
+    // });
   }
 })
 
